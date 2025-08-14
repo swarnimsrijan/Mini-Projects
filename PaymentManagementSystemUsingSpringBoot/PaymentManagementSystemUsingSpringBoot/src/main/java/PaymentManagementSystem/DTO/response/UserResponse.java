@@ -9,6 +9,7 @@ public class UserResponse {
     private String email;
     private UserRole role;
 
+    // Default constructor
     public UserResponse(Long id, String name, String email, UserRole role) {
         this.id = id;
         this.name = name;

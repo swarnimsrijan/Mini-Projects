@@ -17,6 +17,7 @@ public class PaymentResponse {
     private LocalDateTime date;
     private String createdBy;
 
+    // Default constructor
     public PaymentResponse(Long id, BigDecimal amount, PaymentType paymentType,
                            PaymentCategory category, PaymentStatus status,
                            LocalDateTime date, String createdBy) {

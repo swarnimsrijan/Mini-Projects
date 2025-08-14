@@ -22,6 +22,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Creates a new user in the system.
+     *
+     * @param userRequest the details of the user to be created
+     * @return the created UserResponse object
+     */
     @Override
     public UserResponse createUser(UserRequest userRequest) {
         if (userRepository.existsByEmail(userRequest.getEmail())) {
@@ -40,6 +46,11 @@ public class UserServiceImpl implements UserService {
                 savedUser.getEmail(), savedUser.getRole());
     }
 
+    /**
+     * Retrieves all users from the system.
+     *
+     * @return a list of UserResponse objects
+     */
     @Override
     public List<UserResponse> getAllUsers() {
         return userRepository.findAll().stream()
@@ -48,6 +59,12 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Retrieves a user by their ID.
+     *
+     * @param id the ID of the user to retrieve
+     * @return the UserResponse object for the specified user
+     */
     @Override
     public UserResponse getUserById(Long id) {
         User user = userRepository.findById(id)

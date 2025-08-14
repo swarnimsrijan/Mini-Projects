@@ -12,7 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+// This class is part of the Payment Management System project, which uses Spring Boot for backend development.
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -20,6 +20,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    // This class is part of the Payment Management System project, which uses Spring Boot for backend development.
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<UserResponse>> createUser(@Valid @RequestBody UserRequest userRequest) {
@@ -27,6 +28,7 @@ public class UserController {
         return ResponseEntity.ok(ApiResponse.success("User created successfully", userResponse));
     }
 
+    // This method creates a new user in the system.
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<List<UserResponse>>> getAllUsers() {

@@ -25,6 +25,13 @@ public class PaymentServiceImpl implements PaymentService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Creates a new payment record in the system.
+     *
+     * @param paymentRequest the details of the payment to be created
+     * @param userEmail      the email of the user creating the payment
+     * @return the created PaymentResponse object
+     */
     @Override
     public PaymentResponse createPayment(PaymentRequest paymentRequest, String userEmail) {
         User user = userRepository.findByEmail(userEmail)
@@ -43,6 +50,11 @@ public class PaymentServiceImpl implements PaymentService {
         return mapToResponse(savedPayment);
     }
 
+    /**
+     * Retrieves all payment records from the system.
+     *
+     * @return a list of PaymentResponse objects
+     */
     @Override
     public List<PaymentResponse> getAllPayments() {
         return paymentRepository.findAll().stream()
@@ -50,6 +62,12 @@ public class PaymentServiceImpl implements PaymentService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Retrieves a specific payment record by its ID.
+     *
+     * @param id the ID of the payment to retrieve
+     * @return the PaymentResponse object for the specified payment
+     */
     @Override
     public PaymentResponse getPaymentById(Long id) {
         Payment payment = paymentRepository.findById(id)
@@ -57,6 +75,13 @@ public class PaymentServiceImpl implements PaymentService {
         return mapToResponse(payment);
     }
 
+    /**
+     * Updates an existing payment record in the system.
+     *
+     * @param id              the ID of the payment to update
+     * @param paymentRequest  the new details for the payment
+     * @return the updated PaymentResponse object
+     */
     @Override
     public PaymentResponse updatePayment(Long id, PaymentRequest paymentRequest) {
         Payment payment = paymentRepository.findById(id)
@@ -71,6 +96,11 @@ public class PaymentServiceImpl implements PaymentService {
         return mapToResponse(updatedPayment);
     }
 
+    /**
+     * Deletes a payment record from the system.
+     *
+     * @param id the ID of the payment to delete
+     */
     @Override
     public void deletePayment(Long id) {
         if (!paymentRepository.existsById(id)) {
@@ -79,6 +109,12 @@ public class PaymentServiceImpl implements PaymentService {
         paymentRepository.deleteById(id);
     }
 
+    /**
+     * Maps a Payment entity to a PaymentResponse DTO.
+     *
+     * @param payment the Payment entity to map
+     * @return the mapped PaymentResponse DTO
+     */
     private PaymentResponse mapToResponse(Payment payment) {
         return new PaymentResponse(
                 payment.getId(),
