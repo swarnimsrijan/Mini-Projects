@@ -11,10 +11,12 @@ public class ApiResponse<T> {
         this.data = data;
     }
 
+    // Factory methods for creating ApiResponse instances
     public static <T> ApiResponse<T> success(String message, T data) {
         return new ApiResponse<>(true, message, data);
     }
 
+    // Overloaded method for success without data
     public static <T> ApiResponse<T> error(String message) {
         return new ApiResponse<>(false, message, null);
     }

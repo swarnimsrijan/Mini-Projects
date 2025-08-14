@@ -53,6 +53,7 @@ public class User implements UserDetails {
         return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }
 
+    // Required by UserDetails interface
     @Override
     public String getUsername() {
         return email;
