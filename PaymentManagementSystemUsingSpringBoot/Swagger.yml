@@ -1,0 +1,163 @@
+openapi: 3.0.0
+info:
+  title: Payment Management System
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+tags:
+  - name: Authentication Endpoints
+  - name: User Management Endpoints
+  - name: Payment Management Endpoints
+paths:
+  /api/auth/login:
+    post:
+      tags:
+        - Authentication Endpoints
+      summary: Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: srijan1142@gmail.com
+                password: srijan123
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/auth/register:
+    post:
+      tags:
+        - Authentication Endpoints
+      summary: Register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Swarnim
+                email: srijan1142@gmail.com
+                password: srijan123
+                role: ADMIN
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/users:
+    post:
+      tags:
+        - User Management Endpoints
+      summary: Create User(admins only)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Raghu
+                email: Raghu@gmail.com
+                password: password123
+                role: FINANCE_MANAGER
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - User Management Endpoints
+      summary: Get All Users (Admins only)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/payments:
+    post:
+      tags:
+        - Payment Management Endpoints
+      summary: Create Payment (Admin, Finance Manager)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                amount: 1500
+                paymentType: OUTGOING
+                category: SALARY
+                status: PENDING
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Payment Management Endpoints
+      summary: Get All Payments ((All roles))
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/payments/{id}:
+    put:
+      tags:
+        - Payment Management Endpoints
+      summary: Update Payment(Admin, Finance Manager)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                amount: 2000
+                paymentType: OUTGOING
+                category: VENDOR
+                status: COMPLETED
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Payment Management Endpoints
+      summary: Delete Payment(Admin only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
