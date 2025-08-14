@@ -10,10 +10,14 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-
+/* This class handles unauthorized access attempts by returning a JSON response with an error message.
+   It implements the AuthenticationEntryPoint interface from Spring Security.
+   When an unauthenticated user tries to access a protected resource, this class will be invoked.
+*/
+// This class is part of the Payment Management System project, which uses Spring Boot for backend development.
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
-
+    // This method is called when an unauthenticated user tries to access a protected resource.
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException {

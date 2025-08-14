@@ -9,7 +9,11 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
-
+/*
+ * This class is part of the Payment Management System project, which uses Spring Boot for backend development.
+ * It provides methods to generate, validate, and parse JWT tokens for user authentication.
+ * The class uses the io.jsonwebtoken library to handle JWT operations.
+ */
 @Component
 public class JwtTokenProvider {
 
@@ -23,6 +27,7 @@ public class JwtTokenProvider {
         return Keys.hmacShaKeyFor(jwtSecret.getBytes());
     }
 
+    // This class is part of the Payment Management System project, which uses Spring Boot for backend development.
     public String generateToken(Authentication authentication) {
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         Date expiryDate = new Date(System.currentTimeMillis() + jwtExpirationInMs);
@@ -35,6 +40,7 @@ public class JwtTokenProvider {
                 .compact();
     }
 
+    // This method generates a JWT token for the given user details.
     public String getUsernameFromToken(String token) {
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
@@ -44,6 +50,7 @@ public class JwtTokenProvider {
         return claims.getSubject();
     }
 
+    // This method validates the JWT token and checks if it is correctly signed and not expired.
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder()
