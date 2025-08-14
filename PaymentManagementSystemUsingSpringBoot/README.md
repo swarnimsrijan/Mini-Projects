@@ -157,3 +157,7 @@ classDiagram
     Payment ||--|| PaymentCategory
     Payment ||--|| PaymentStatus
     Payment }o--|| User : belongs to
+
+```
+
+Swagger file Link :- [Swagger Link]https://petstore.swagger.io/?url=https://raw.githubusercontent.com/swarnimsrijan/Mini-Projects/refs/heads/main/PaymentManagementSystemUsingSpringBoot/Swagger.yml
