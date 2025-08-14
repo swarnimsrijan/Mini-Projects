@@ -22,6 +22,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/* This class is part of the Payment Management System project, which uses Spring Boot for backend development.
+ * It configures security settings for the application, including JWT authentication and user details service.
+ * The class uses Spring
+    * Security to manage authentication and authorization for different user roles.
+ */
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
@@ -41,6 +47,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    // This class is part of the Payment Management System project, which uses Spring Boot for backend development.
     @Bean
     public UserDetailsService userDetailsService() {
         return email -> {
@@ -50,11 +57,13 @@ public class SecurityConfig {
         };
     }
 
+    // This method provides a custom UserDetailsService that retrieves user details from the database using the UserRepository.
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter(jwtTokenProvider, userRepository);
     }
 
+    // This method configures the authentication provider to use the custom UserDetailsService and password encoder.
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -63,11 +72,13 @@ public class SecurityConfig {
         return authProvider;
     }
 
+    // This method provides the AuthenticationManager bean, which is used for authenticating users.
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 
+    // This method configures the security filter chain for the application, setting up CORS, CSRF, and session management.
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()

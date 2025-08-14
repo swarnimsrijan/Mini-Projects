@@ -17,7 +17,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
+/*
+ * This class is part of the Payment Management System project, which uses Spring Boot for backend development.
+ * It handles user authentication and registration through RESTful API endpoints.
+ * The class uses Spring Security for authentication and JWT for token generation.
+ */
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -31,6 +35,7 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
+    // This class is part of the Payment Management System project, which uses Spring Boot for backend development.
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<JwtResponse>> login(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
@@ -45,6 +50,7 @@ public class AuthController {
         return ResponseEntity.ok(ApiResponse.success("Login successful", jwtResponse));
     }
 
+    // This method handles user login by authenticating the user and generating a JWT token.
     @PostMapping("/register")
     public ResponseEntity<ApiResponse<UserResponse>> register(@Valid @RequestBody UserRequest userRequest) {
         UserResponse userResponse = userService.createUser(userRequest);
